@@ -2,6 +2,7 @@ import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
 import { ColorSchemeName } from 'react-native';
+import Colors from '../constants/Colors'
 
 import NotFoundScreen from '../screens/NotFoundScreen';
 import { RootStackParamList } from '../types';
@@ -26,8 +27,17 @@ const Stack = createStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Root" component={BottomTabNavigator} />
+    <Stack.Navigator screenOptions={{ 
+      headerStyle: {
+          backgroundColor: Colors.light.tint
+      },
+      headerTintColor: Colors.light.background,
+      headerTitleAlign: 'left',
+      headerTitleStyle: {
+        fontWeight: 'bold'
+      }
+    }}>
+      <Stack.Screen name="Root" component={BottomTabNavigator} options={{ title: "WhatsApp" }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
     </Stack.Navigator>
   );
