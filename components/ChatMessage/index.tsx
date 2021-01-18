@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     },
     name: {
         fontWeight: 'bold',
-        color: Colors.light.tint,
+        color: '#0C6157',
     },
     message: {
         marginVertical: 5

@@ -4,14 +4,15 @@ import { View, Text, FlatList, ImageBackground } from 'react-native';
 import ChatMessage from '../components/ChatMessage';
 import Chats from '../data/Chats';
 import BG from '../assets/images/BG.png'
+import InputBox from '../components/InputBox/index';
 
 export default function ChatDetailScreen() {
 
     const route = useRoute()
 
-    useEffect(() => {
-        console.log(route.params)
-    }, [])
+    // useEffect(() => {
+    //     console.log(route.params)
+    // }, [])
 
     return (
         <ImageBackground style={{height: '100%', width: '100%'}} source={BG}>
@@ -21,6 +22,7 @@ export default function ChatDetailScreen() {
                 keyExtractor={(item) => item.id}
                 inverted
             />
+        <InputBox/>
         </ImageBackground>
     )
 }
