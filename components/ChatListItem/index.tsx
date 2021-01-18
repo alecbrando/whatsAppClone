@@ -8,13 +8,16 @@ export type ChatListProps = {
 }
 
 export default function ChatListItem(props: ChatListProps) {
+    const {chatRoom} = props
     const navigatation = useNavigation()
+    const user = chatRoom.users[1]
     const handlePress = () => {
-        navigatation.navigate('')
+        navigatation.navigate('ChatDetailScreen', { 
+            id: chatRoom.id,
+            name: user.name
+         })
     }
 
-    const {chatRoom} = props
-    const user = chatRoom.users[1]
     return (
         <TouchableWithoutFeedback onPress={() => handlePress()}>
         <View style={styles.container}>

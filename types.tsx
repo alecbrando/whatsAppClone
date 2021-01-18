@@ -1,6 +1,7 @@
 export type RootStackParamList = {
   Root: undefined;
   NotFound: undefined;
+  ChatDetailScreen: undefined;
 };
 
 export type MainTabParamList = {
@@ -16,7 +17,6 @@ export type TabOneParamList = {
 
 export type TabTwoParamList = {
   TabTwoScreen: undefined;
-  ChatDetailScreen: undefined;
 };
 
 export type ChatRoom = {

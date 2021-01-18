@@ -94,11 +94,6 @@ function ChatScreenNavigator() {
         component={ChatScreen}
         options={{ headerShown: false  }}
       />
-      <TabTwoStack.Screen
-        name="ChatDetailScreen"
-        component={ChatDetailScreen}
-        options={{ headerShown: false  }}
-      />
     </TabTwoStack.Navigator>
   );
 }
