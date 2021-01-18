@@ -13,11 +13,6 @@ export default function TabOneScreen() {
   );
 }
 
-TabOneScreen.navigationOptions = () => {
-  return {
-    headerShown: false,
-  };
-};
 
 const styles = StyleSheet.create({
   container: {
