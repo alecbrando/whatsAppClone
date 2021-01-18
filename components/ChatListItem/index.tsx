@@ -1,31 +1,37 @@
+import { useNavigation } from '@react-navigation/native'
+import moment from 'moment'
 import React from 'react'
-import {StyleSheet, View, Text, Image} from 'react-native'
+import {StyleSheet, View, Text, Image, TouchableWithoutFeedback} from 'react-native'
 import {ChatRoom} from '../../types'
-
 export type ChatListProps = {
     chatRoom: ChatRoom
 }
 
 export default function ChatListItem(props: ChatListProps) {
+    const navigatation = useNavigation()
+    const handlePress = () => {
+        navigatation.navigate('')
+    }
 
     const {chatRoom} = props
     const user = chatRoom.users[1]
     return (
+        <TouchableWithoutFeedback onPress={() => handlePress()}>
         <View style={styles.container}>
             <View style={styles.leftSide}>
                 <Image style={styles.avatar} source={{uri: user.imageUri}} />
             </View>
             <View style={styles.middle}>
             <Text style={styles.name}>{user.name}</Text>
-            <Text style={styles.content}>{chatRoom.lastMessage.content}</Text>
+            <Text numberOfLines={1} style={styles.content}>{chatRoom.lastMessage.content}</Text>
             </View>
             <View style={styles.rightSide}>
-            <Text>Yesterday</Text>
+            <Text style={{color: 'grey'}}>{moment(chatRoom.lastMessage.createdAt).fromNow()}</Text>
             </View>
         </View>
+        </TouchableWithoutFeedback>
     )
 }
-//{chatRoom.lastMessage.createdAt}
 
 
 const styles = StyleSheet.create({
@@ -44,7 +50,8 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         width: '100%',
-        marginLeft: 15
+        marginTop: 15,
+        height: 55
     },
     leftSide: {
         flexDirection: 'column'
@@ -52,10 +59,12 @@ const styles = StyleSheet.create({
     middle: {
         justifyContent: 'space-around',
         marginLeft: 15,
+        width: 150
     },
     rightSide: {
         alignItems: 'flex-end',
-        width: 160
+        width: 180,
+        marginTop: 5
     }
 
 })

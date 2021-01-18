@@ -8,6 +8,7 @@ import useColorScheme from '../hooks/useColorScheme';
 import TabOneScreen from '../screens/TabOneScreen';
 import ChatScreen from '../screens/ChatScreen';
 import { MainTabParamList, TabOneParamList, TabTwoParamList } from '../types';
+import ChatDetailScreen from '../screens/ChatDetailScreen';
 
 const MainTab = createMaterialTopTabNavigator<MainTabParamList>();
 
@@ -91,6 +92,11 @@ function ChatScreenNavigator() {
       <TabTwoStack.Screen
         name="TabTwoScreen"
         component={ChatScreen}
+        options={{ headerShown: false  }}
+      />
+      <TabTwoStack.Screen
+        name="ChatDetailScreen"
+        component={ChatDetailScreen}
         options={{ headerShown: false  }}
       />
     </TabTwoStack.Navigator>

@@ -16,6 +16,7 @@ export type TabOneParamList = {
 
 export type TabTwoParamList = {
   TabTwoScreen: undefined;
+  ChatDetailScreen: undefined;
 };
 
 export type ChatRoom = {
