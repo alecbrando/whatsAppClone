@@ -21,8 +21,8 @@ export default function ChatScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    marginLeft: 15,
+    marginRight: 15
   },
   title: {
     fontSize: 20,

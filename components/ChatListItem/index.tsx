@@ -54,7 +54,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         width: '100%',
         marginTop: 15,
-        height: 55
+        height: 55,
+        borderBottomWidth: 1,
+        borderBottomColor: 'rgba(0, 0, 0, 0.5)'
     },
     leftSide: {
         flexDirection: 'column'
