@@ -3,6 +3,7 @@ import { StyleSheet, Text, View  } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import ChatListItem from '../components/ChatListItem';
 import ChatRooms from '../data/ChatRooms'
+import NewMessage from '../components/NewMessage/index';
 
 export default function ChatScreen() {
   return (
@@ -12,7 +13,7 @@ export default function ChatScreen() {
         renderItem={({item}) => <ChatListItem chatRoom={item} />}
         keyExtractor={(item) => item.id}
       />
-      
+        <NewMessage />
     </View>
   );
 }
@@ -32,4 +33,12 @@ const styles = StyleSheet.create({
     height: 1,
     width: '80%',
   },
+  // messageButton: {
+  //     alignItems: 'flex-end',
+  //     width: '100%',
+  //     marginRight: 30,
+  //     marginBottom: 30,
+  //     backgroundColor: 'transparent',
+  //     position: 'absolute'
+  // }
 });

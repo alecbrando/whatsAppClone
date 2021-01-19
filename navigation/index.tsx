@@ -9,6 +9,7 @@ import { RootStackParamList } from '../types';
 import MainTabNavigator from './MainTabNavigator';
 import LinkingConfiguration from './LinkingConfiguration';
 import ChatDetailScreen from '../screens/ChatDetailScreen';
+import ContactsScreen from '../screens/ContactsScreen';
 
 // If you are not familiar with React Navigation, we recommend going through the
 // "Fundamentals" guide: https://reactnavigation.org/docs/getting-started
@@ -65,6 +66,10 @@ function RootNavigator() {
           </View>
         )
       })}
+        />
+      <Stack.Screen 
+      name="ContactsScreen" 
+      component={ContactsScreen} 
         />
     </Stack.Navigator>
   );
