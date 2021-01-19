@@ -20,7 +20,7 @@ export default function ChatDetailScreen() {
                 data={Chats.messages}
                 renderItem={({item}) => <ChatMessage messages={item} />}
                 keyExtractor={(item) => item.id}
-                inverted
+                // inverted
             />
         <InputBox/>
         </ImageBackground>

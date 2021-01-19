@@ -2,11 +2,19 @@ import React from 'react'
 import {View, StyleSheet} from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
 
 export default function NewMessage() {
+    const navigation = useNavigation()
+    const handlePress = () => {
+        navigation.navigate('Contacts')
+    }
     return (
         <View style={styles.container}>
+            <TouchableOpacity onPress={() => handlePress()}>
             <MaterialCommunityIcons name="message-reply-text" size={28} color={'white'} />
+            </TouchableOpacity>
         </View>
     )
 }

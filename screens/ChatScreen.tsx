@@ -33,12 +33,4 @@ const styles = StyleSheet.create({
     height: 1,
     width: '80%',
   },
-  // messageButton: {
-  //     alignItems: 'flex-end',
-  //     width: '100%',
-  //     marginRight: 30,
-  //     marginBottom: 30,
-  //     backgroundColor: 'transparent',
-  //     position: 'absolute'
-  // }
 });

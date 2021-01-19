@@ -2,7 +2,7 @@ export type RootStackParamList = {
   Root: undefined;
   NotFound: undefined;
   ChatDetailScreen: undefined;
-  ContactsScreen: undefined
+  Contacts: undefined
 };
 
 export type MainTabParamList = {
@@ -30,6 +30,7 @@ export type User = {
   id: string
   name: string
   imageUri: string
+  status: string
 }
 
 export type Message = {
