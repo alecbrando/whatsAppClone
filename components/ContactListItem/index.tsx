@@ -27,7 +27,7 @@ export default function ContactListItem(props: ContactListProps) {
             </View>
             <View style={styles.middle}>
             <Text style={styles.name}>{user.name}</Text>
-            <Text numberOfLines={1} style={styles.status}>{user.status}</Text>
+            <Text numberOfLines={1} style={styles.status}>Status: {user.status}</Text>
             </View>
         </View>
         </TouchableWithoutFeedback>
