@@ -1,8 +1,11 @@
 import { useNavigation } from '@react-navigation/native'
+import { API, Auth, graphqlOperation } from 'aws-amplify'
 import moment from 'moment'
 import React from 'react'
 import {StyleSheet, View, Text, Image, TouchableWithoutFeedback} from 'react-native'
 import { User} from '../../types'
+import { createChatRoom, createChatRoomUser } from '../../src/graphql/mutations';
+
 
 export type ContactListProps = {
     user: User
@@ -11,12 +14,45 @@ export type ContactListProps = {
 export default function ContactListItem(props: ContactListProps) {
     const {user} = props
     const navigatation = useNavigation()
+    const handlePress = async () => {
+        try {
+            //creating chat room
+            const userInfo = await Auth.currentAuthenticatedUser({ bypassCache: true })
 
-    const handlePress = () => {
-        navigatation.navigate('ChatDetailScreen', { 
-            id: user.id,
-            name: user.name
-         })
+            const newChatRoomData = await API.graphql(graphqlOperation(
+                createChatRoom,
+                { input : {} }
+                ))
+            
+
+            const newChat = newChatRoomData.data.createChatRoom
+
+            //adding user to chat room
+            await API.graphql(graphqlOperation(
+                createChatRoomUser,
+                { input: {  
+                    userID: user.id ,
+                    chatRoomID: newChat.id,
+                }}
+            ))
+            
+            await API.graphql(graphqlOperation(
+                createChatRoomUser,
+                { input: {  
+                    userID: userInfo.attributes.sub,
+                    chatRoomID: newChat.id,
+                }}
+            ))
+
+            // add authenticated user to the chat room
+            navigatation.navigate('ChatDetailScreen', { 
+                id: newChat.id,
+                name: user.name
+             })
+        } catch (error) {
+            console.log(error)
+        }
+
     }
 
     return (

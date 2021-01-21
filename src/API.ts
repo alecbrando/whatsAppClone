@@ -4,7 +4,7 @@
 
 export type CreateUserInput = {
   id?: string | null,
-  name: string,
+  name?: string | null,
   imageUri?: string | null,
   status?: string | null,
 };
@@ -104,7 +104,7 @@ export type CreateUserMutation = {
   createUser:  {
     __typename: "User",
     id: string,
-    name: string,
+    name: string | null,
     imageUri: string | null,
     status: string | null,
     createdAt: string,
@@ -121,7 +121,7 @@ export type UpdateUserMutation = {
   updateUser:  {
     __typename: "User",
     id: string,
-    name: string,
+    name: string | null,
     imageUri: string | null,
     status: string | null,
     createdAt: string,
@@ -138,7 +138,7 @@ export type DeleteUserMutation = {
   deleteUser:  {
     __typename: "User",
     id: string,
-    name: string,
+    name: string | null,
     imageUri: string | null,
     status: string | null,
     createdAt: string,
@@ -154,7 +154,7 @@ export type GetUserQuery = {
   getUser:  {
     __typename: "User",
     id: string,
-    name: string,
+    name: string | null,
     imageUri: string | null,
     status: string | null,
     createdAt: string,
@@ -174,7 +174,7 @@ export type ListUsersQuery = {
     items:  Array< {
       __typename: "User",
       id: string,
-      name: string,
+      name: string | null,
       imageUri: string | null,
       status: string | null,
       createdAt: string,
@@ -188,7 +188,7 @@ export type OnCreateUserSubscription = {
   onCreateUser:  {
     __typename: "User",
     id: string,
-    name: string,
+    name: string | null,
     imageUri: string | null,
     status: string | null,
     createdAt: string,
@@ -200,7 +200,7 @@ export type OnUpdateUserSubscription = {
   onUpdateUser:  {
     __typename: "User",
     id: string,
-    name: string,
+    name: string | null,
     imageUri: string | null,
     status: string | null,
     createdAt: string,
@@ -212,7 +212,7 @@ export type OnDeleteUserSubscription = {
   onDeleteUser:  {
     __typename: "User",
     id: string,
-    name: string,
+    name: string | null,
     imageUri: string | null,
     status: string | null,
     createdAt: string,
