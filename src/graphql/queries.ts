@@ -181,6 +181,14 @@ export const messagesByChatRoom = /* GraphQL */ `
         content
         userID
         chatRoomID
+        user {
+          id
+          name
+          imageUri
+          status
+          createdAt
+          updatedAt
+        }
         updatedAt
       }
       nextToken

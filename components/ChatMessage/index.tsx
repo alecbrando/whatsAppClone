@@ -1,30 +1,39 @@
-import React from 'react'
+import React, {useEffect, useState}  from 'react'
 import {View, Text, StyleSheet} from 'react-native'
 import { Message } from '../../types'
 import moment from 'moment'
 import { Colors } from 'react-native/Libraries/NewAppScreen'
+import { Auth } from 'aws-amplify'
 export type ChatMessageProps = {
-    messages: Message
+    message: Message
 }
 
 export default function ChatMessage(props: ChatMessageProps) {
-    const { messages } = props
-
+    const [myID, setMyID] = useState('')
+    const { message } = props
+    
+    useEffect(() => {
+        const fetchCurrentUser = async () => {
+            const userInfo = await Auth.currentAuthenticatedUser()
+            setMyID(userInfo.attributes.sub)
+        }
+        fetchCurrentUser()
+    }, [])
     const isMyMessage = () => {
-        return messages.user.id === 'u1'
+        return message.user.id === myID
     }
-
+    
     return (
         <View style={styles.container}>
             {isMyMessage() ? 
             <View style={styles.myMessageBox}>
-                <Text style={styles.message}>{messages.content}</Text>
-                <Text style={styles.time}>{moment(messages.createdAt).fromNow()}</Text>
+                <Text style={styles.message}>{message.content}</Text>
+                <Text style={styles.time}>{moment(message.createdAt).fromNow()}</Text>
             </View> : 
             <View style={styles.messageBox}>
-                <Text style={styles.name}>{messages.user.name}</Text>
-                <Text>{messages.content}</Text>
-                <Text style={styles.time}>{moment(messages.createdAt).fromNow()}</Text>
+                <Text style={styles.name}>{message.user.name}</Text>
+                <Text>{message.content}</Text>
+                <Text style={styles.time}>{moment(message.createdAt).fromNow()}</Text>
             </View>
             }   
         </View>
