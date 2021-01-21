@@ -7,15 +7,15 @@ import BG from '../assets/images/BG.png'
 import InputBox from '../components/InputBox/index';
 import { API, graphqlOperation } from 'aws-amplify';
 import { messagesByChatRoom } from '../src/graphql/queries';
+import { onCreateMessage } from '../src/graphql/subscriptions';
 
 
 
 export default function ChatDetailScreen() {
     const [messages, setMessages] = useState([])
     const route = useRoute()
-
     useEffect(() => {
-        const fetchMessages = async () => {
+         const fetchMessages = async () => {
             const messageData = await API.graphql(graphqlOperation(messagesByChatRoom, {
                 chatRoomID: route.params.id,
                 sortDirection: 'ASC'
@@ -24,6 +24,24 @@ export default function ChatDetailScreen() {
         }
         fetchMessages()
     }, [])
+
+    useEffect(() => {
+        const sub = API.graphql(graphqlOperation(onCreateMessage)).subscribe({
+            next: (messageData : any) => {
+                const newMessage = messageData.value.data.onCreateMessage
+                if(newMessage.chatRoomID !== route.params.id){
+                    return
+                } else {
+                    console.log(messages)
+                    setMessages([...messages, newMessage])
+                }
+            }
+        })
+        return function cleanup() {
+            sub.unsubscribe()
+        }
+    }, [])
+
 
     
 
