@@ -20,20 +20,18 @@ export default function ChatScreen() {
 
         setChatRooms(userData.data.getUser.chatRoomUser.items)
       } catch (error) {
-        
+        console.log(error)
       }
-        // const chatRooms = await API.graphql(graphqlOperation())
     }
     fetchChats()
   }, [])
 
-  console.log(chatRooms)
 
   return (
     <View style={styles.container}>
       <FlatList
-        data={ChatRooms}
-        renderItem={({item}) => <ChatListItem chatRoom={item} />}
+        data={chatRooms}
+        renderItem={({item}) => <ChatListItem chatRoom={item.chatRoom} />}
         keyExtractor={(item) => item.id}
       />
         <NewMessage />
