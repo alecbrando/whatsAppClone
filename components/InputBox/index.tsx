@@ -4,7 +4,7 @@ import {MaterialCommunityIcons, MaterialIcons, FontAwesome5, Entypo, Fontisto} f
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { API, Auth, graphqlOperation } from 'aws-amplify';
-import { createMessage } from '../../src/graphql/mutations';
+import { createMessage, updateChatRoom } from '../../src/graphql/mutations';
 
 export default function InputBox(props) {
     const [myUserId, setMyUserId] = useState('')
@@ -30,13 +30,24 @@ export default function InputBox(props) {
         }
     }
 
+    const updateLastMessage = async(messageId: string) => {
+        await API.graphql(graphqlOperation(updateChatRoom, { 
+            input: {
+                id: chatRoomID,
+                lastMessageID: messageId
+            }
+         }))
+    }
+
     const sendMessage = async () => {
         try {
-            await API.graphql(graphqlOperation(createMessage, { input : { 
+            const newMessage = await API.graphql(graphqlOperation(createMessage, { input : { 
                 content: message,
                 userID: myUserId,
                 chatRoomID: chatRoomID
             }}))
+
+            await updateLastMessage(newMessage.data.createMessage.id)
         } catch (error) {
             console.log(error)
         }

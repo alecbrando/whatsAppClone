@@ -25,7 +25,6 @@ export default function ChatDetailScreen() {
         fetchMessages()
     }, [])
 
-    console.log(messages)
     
 
     return (

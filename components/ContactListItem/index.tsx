@@ -21,7 +21,9 @@ export default function ContactListItem(props: ContactListProps) {
 
             const newChatRoomData = await API.graphql(graphqlOperation(
                 createChatRoom,
-                { input : {} }
+                { input : {
+                    lastMessageID: ""
+                } }
                 ))
             
 

@@ -13,7 +13,7 @@ export default function ChatListItem(props: ChatListProps) {
     const [chatUser, setUser] = useState(null)
     const { chatRoom } = props
     const navigatation = useNavigation()
-    console.log(chatRoom)
+
     useEffect(() => {
         const currentUser = async() => {
             const userInfo = await Auth.currentAuthenticatedUser()
@@ -43,10 +43,10 @@ export default function ChatListItem(props: ChatListProps) {
             </View>
             <View style={styles.middle}>
             <Text style={styles.name}>{chatUser.name}</Text>
-            {/* <Text numberOfLines={1} style={styles.content}>{chatRoom.lastMessage.content}</Text> */}
+            <Text numberOfLines={1} style={styles.content}>{chatRoom.lastMessage.user.name} : {chatRoom.lastMessage.content}</Text>
             </View>
             <View style={styles.rightSide}>
-            {/* <Text style={{color: 'grey'}}>{moment(chatRoom.lastMessage.createdAt).fromNow()}</Text> */}
+            <Text style={{color: 'grey'}}>{moment(chatRoom.lastMessage.createdAt).fromNow()}</Text>
             </View>
         </View>
         </TouchableWithoutFeedback>

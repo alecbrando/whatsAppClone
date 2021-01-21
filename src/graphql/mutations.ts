@@ -75,6 +75,7 @@ export const createChatRoomUser = /* GraphQL */ `
       }
       chatRoom {
         id
+        lastMessageID
         createdAt
         updatedAt
       }
@@ -102,6 +103,7 @@ export const updateChatRoomUser = /* GraphQL */ `
       }
       chatRoom {
         id
+        lastMessageID
         createdAt
         updatedAt
       }
@@ -129,6 +131,7 @@ export const deleteChatRoomUser = /* GraphQL */ `
       }
       chatRoom {
         id
+        lastMessageID
         createdAt
         updatedAt
       }
@@ -148,6 +151,10 @@ export const createChatRoom = /* GraphQL */ `
         nextToken
       }
       messages {
+        nextToken
+      }
+      lastMessageID
+      lastMessage {
         id
         createdAt
         content
@@ -171,6 +178,10 @@ export const updateChatRoom = /* GraphQL */ `
         nextToken
       }
       messages {
+        nextToken
+      }
+      lastMessageID
+      lastMessage {
         id
         createdAt
         content
@@ -194,6 +205,10 @@ export const deleteChatRoom = /* GraphQL */ `
         nextToken
       }
       messages {
+        nextToken
+      }
+      lastMessageID
+      lastMessage {
         id
         createdAt
         content
@@ -227,6 +242,7 @@ export const createMessage = /* GraphQL */ `
       }
       chatRoom {
         id
+        lastMessageID
         createdAt
         updatedAt
       }
@@ -255,6 +271,7 @@ export const updateMessage = /* GraphQL */ `
       }
       chatRoom {
         id
+        lastMessageID
         createdAt
         updatedAt
       }
@@ -283,6 +300,7 @@ export const deleteMessage = /* GraphQL */ `
       }
       chatRoom {
         id
+        lastMessageID
         createdAt
         updatedAt
       }
