@@ -126,6 +126,14 @@ export const onCreateChatRoom = /* GraphQL */ `
       chatRoomUsers {
         nextToken
       }
+      messages {
+        id
+        createdAt
+        content
+        userID
+        chatRoomID
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -137,6 +145,14 @@ export const onUpdateChatRoom = /* GraphQL */ `
       id
       chatRoomUsers {
         nextToken
+      }
+      messages {
+        id
+        createdAt
+        content
+        userID
+        chatRoomID
+        updatedAt
       }
       createdAt
       updatedAt
@@ -150,6 +166,14 @@ export const onDeleteChatRoom = /* GraphQL */ `
       chatRoomUsers {
         nextToken
       }
+      messages {
+        id
+        createdAt
+        content
+        userID
+        chatRoomID
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -160,6 +184,22 @@ export const onCreateMessage = /* GraphQL */ `
     onCreateMessage {
       id
       createdAt
+      content
+      userID
+      chatRoomID
+      user {
+        id
+        name
+        imageUri
+        status
+        createdAt
+        updatedAt
+      }
+      chatRoom {
+        id
+        createdAt
+        updatedAt
+      }
       updatedAt
     }
   }
@@ -169,6 +209,22 @@ export const onUpdateMessage = /* GraphQL */ `
     onUpdateMessage {
       id
       createdAt
+      content
+      userID
+      chatRoomID
+      user {
+        id
+        name
+        imageUri
+        status
+        createdAt
+        updatedAt
+      }
+      chatRoom {
+        id
+        createdAt
+        updatedAt
+      }
       updatedAt
     }
   }
@@ -178,6 +234,22 @@ export const onDeleteMessage = /* GraphQL */ `
     onDeleteMessage {
       id
       createdAt
+      content
+      userID
+      chatRoomID
+      user {
+        id
+        name
+        imageUri
+        status
+        createdAt
+        updatedAt
+      }
+      chatRoom {
+        id
+        createdAt
+        updatedAt
+      }
       updatedAt
     }
   }

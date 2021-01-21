@@ -147,6 +147,14 @@ export const createChatRoom = /* GraphQL */ `
       chatRoomUsers {
         nextToken
       }
+      messages {
+        id
+        createdAt
+        content
+        userID
+        chatRoomID
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -161,6 +169,14 @@ export const updateChatRoom = /* GraphQL */ `
       id
       chatRoomUsers {
         nextToken
+      }
+      messages {
+        id
+        createdAt
+        content
+        userID
+        chatRoomID
+        updatedAt
       }
       createdAt
       updatedAt
@@ -177,6 +193,14 @@ export const deleteChatRoom = /* GraphQL */ `
       chatRoomUsers {
         nextToken
       }
+      messages {
+        id
+        createdAt
+        content
+        userID
+        chatRoomID
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -190,6 +214,22 @@ export const createMessage = /* GraphQL */ `
     createMessage(input: $input, condition: $condition) {
       id
       createdAt
+      content
+      userID
+      chatRoomID
+      user {
+        id
+        name
+        imageUri
+        status
+        createdAt
+        updatedAt
+      }
+      chatRoom {
+        id
+        createdAt
+        updatedAt
+      }
       updatedAt
     }
   }
@@ -202,6 +242,22 @@ export const updateMessage = /* GraphQL */ `
     updateMessage(input: $input, condition: $condition) {
       id
       createdAt
+      content
+      userID
+      chatRoomID
+      user {
+        id
+        name
+        imageUri
+        status
+        createdAt
+        updatedAt
+      }
+      chatRoom {
+        id
+        createdAt
+        updatedAt
+      }
       updatedAt
     }
   }
@@ -214,6 +270,22 @@ export const deleteMessage = /* GraphQL */ `
     deleteMessage(input: $input, condition: $condition) {
       id
       createdAt
+      content
+      userID
+      chatRoomID
+      user {
+        id
+        name
+        imageUri
+        status
+        createdAt
+        updatedAt
+      }
+      chatRoom {
+        id
+        createdAt
+        updatedAt
+      }
       updatedAt
     }
   }

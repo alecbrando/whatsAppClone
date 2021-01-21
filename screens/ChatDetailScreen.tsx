@@ -10,9 +10,6 @@ export default function ChatDetailScreen() {
 
     const route = useRoute()
 
-    // useEffect(() => {
-    //     console.log(route.params)
-    // }, [])
 
     return (
         <ImageBackground style={{height: '100%', width: '100%'}} source={BG}>
@@ -22,7 +19,7 @@ export default function ChatDetailScreen() {
                 keyExtractor={(item) => item.id}
                 // inverted
             />
-        <InputBox/>
+        <InputBox chatRoomID={route.params.id} />
         </ImageBackground>
     )
 }

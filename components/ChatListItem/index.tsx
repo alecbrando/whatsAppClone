@@ -13,15 +13,11 @@ export default function ChatListItem(props: ChatListProps) {
     const [chatUser, setUser] = useState(null)
     const { chatRoom } = props
     const navigatation = useNavigation()
-
+    console.log(chatRoom)
     useEffect(() => {
         const currentUser = async() => {
             const userInfo = await Auth.currentAuthenticatedUser()
-            if(user.id === userInfo.attributes.sub){
-                setUser(chatRoom.chatRoomUsers.items[0].user)
-            } else {
-                setUser(chatRoom.chatRoomUsers.items[1].user)
-            }
+            setUser(chatRoom.chatRoomUsers.items[1].user)
         }
         currentUser()
     }, [])
@@ -33,6 +29,10 @@ export default function ChatListItem(props: ChatListProps) {
          })
     }
 
+
+    if(!chatUser){
+        return null
+    }
 
 
     return (

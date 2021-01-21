@@ -26,7 +26,6 @@ export default function ChatScreen() {
     fetchChats()
   }, [])
 
-
   return (
     <View style={styles.container}>
       <FlatList

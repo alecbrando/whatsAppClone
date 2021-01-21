@@ -11,13 +11,6 @@ export const getUser = /* GraphQL */ `
       status
       chatRoomUser {
         nextToken
-        items {
-          id
-          userID
-          chatRoomID
-          createdAt
-          updatedAt
-        }
       }
       createdAt
       updatedAt
@@ -92,6 +85,14 @@ export const getChatRoom = /* GraphQL */ `
       chatRoomUsers {
         nextToken
       }
+      messages {
+        id
+        createdAt
+        content
+        userID
+        chatRoomID
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -118,6 +119,22 @@ export const getMessage = /* GraphQL */ `
     getMessage(id: $id) {
       id
       createdAt
+      content
+      userID
+      chatRoomID
+      user {
+        id
+        name
+        imageUri
+        status
+        createdAt
+        updatedAt
+      }
+      chatRoom {
+        id
+        createdAt
+        updatedAt
+      }
       updatedAt
     }
   }
@@ -132,6 +149,38 @@ export const listMessages = /* GraphQL */ `
       items {
         id
         createdAt
+        content
+        userID
+        chatRoomID
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const messagesByChatRoom = /* GraphQL */ `
+  query MessagesByChatRoom(
+    $chatRoomID: ID
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelMessageFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    messagesByChatRoom(
+      chatRoomID: $chatRoomID
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        createdAt
+        content
+        userID
+        chatRoomID
         updatedAt
       }
       nextToken
