@@ -15,7 +15,6 @@ export default function ContactsScreen() {
       try {
         const userData = await API.graphql(graphqlOperation(listUsers))
         const userInfo = await Auth.currentAuthenticatedUser()
-        console.log(userInfo.attributes.sub)
         setContacts(userData.data.listUsers.items.filter(user => user.id !== userInfo.attributes.sub))
       } catch (error) {
         console.log(error)

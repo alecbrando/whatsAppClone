@@ -10,17 +10,21 @@ export type ChatListProps = {
 }
 
 export default function ChatListItem(props: ChatListProps) {
-    const [chatUser, setUser] = useState(null)
+    const [chatUser, setOtherUser] = useState(null)
     const { chatRoom } = props
     const navigatation = useNavigation()
 
     useEffect(() => {
-        const currentUser = async() => {
-            const userInfo = await Auth.currentAuthenticatedUser()
-            setUser(chatRoom.chatRoomUsers.items[0].user.id === userInfo.id ? chatRoom.chatRoomUsers.items[1].user : chatRoom.chatRoomUsers.items[0].user)
+        const getOtherUser = async () => {
+          const userInfo = await Auth.currentAuthenticatedUser();
+          if (chatRoom.chatRoomUsers.items[0].user.id === userInfo.attributes.sub) {
+            setOtherUser(chatRoom.chatRoomUsers.items[1].user);
+          } else {
+            setOtherUser(chatRoom.chatRoomUsers.items[0].user);
+          }
         }
-        currentUser()
-    }, [])
+        getOtherUser();
+      }, [])
 
     const handlePress = () => {
         navigatation.navigate('ChatDetailScreen', { 

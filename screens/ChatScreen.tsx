@@ -2,39 +2,43 @@ import React, {useEffect, useState} from 'react';
 import { StyleSheet, Text, View  } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import ChatListItem from '../components/ChatListItem';
-import ChatRooms from '../data/ChatRooms'
 import NewMessage from '../components/NewMessage/index';
 import { API, Auth, graphqlOperation } from 'aws-amplify';
 import { getUser } from './queries';
-import { onCreateChatRoom } from '../src/graphql/subscriptions';
+import { onCreateChatRoom, onUpdateChatRoom } from '../src/graphql/subscriptions';
 
 export default function ChatScreen() {
   const [chatRooms, setChatRooms] = useState([])
 
-  useEffect(() => {
-    const fetchChats = async () => {
-      try {
-        const userInfo = await Auth.currentAuthenticatedUser()
-        const userData = await API.graphql(graphqlOperation(
-          getUser, { id: userInfo.attributes.sub }
-        ))
+  const fetchChats = async () => {
+    try {
+      const userInfo = await Auth.currentAuthenticatedUser()
+      const userData = await API.graphql(graphqlOperation(
+        getUser, { id: userInfo.attributes.sub }
+      ))
 
-        setChatRooms(userData.data.getUser.chatRoomUser.items)
-      } catch (error) {
-        console.log(error)
-      }
+      setChatRooms(userData.data.getUser.chatRoomUser.items)
+    } catch (error) {
+      console.log(error)
     }
+  }
+  useEffect(() => {
     fetchChats()
   }, [])
 
 
   useEffect(() => {
-      const sub = API.graphql(graphqlOperation(onCreateChatRoom)).subscribe({
+      const sub = API.graphql(graphqlOperation(onUpdateChatRoom)).subscribe({
         next: (chatRoomData : object) => {
-          const newChatRoom = chatRoomData.value.data.onCreateChatRoom
+          const newChatRoom = chatRoomData.value.data.onUpdateChatRoom
+          fetchChats()
         }
       })
+      return function cleanup() {
+        sub.unsubscribe()
+    }
   }, [])
+
 
   return (
     <View style={styles.container}>

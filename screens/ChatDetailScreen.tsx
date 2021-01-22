@@ -31,6 +31,7 @@ export default function ChatDetailScreen() {
                 if(newMessage.chatRoomID !== route.params.id){
                     return
                 } else {
+                    // setMessages([...messages, newMessage])
                     fetchMessages()
                 }
             }
