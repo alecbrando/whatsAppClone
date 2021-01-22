@@ -43,7 +43,7 @@ export default function ChatMessage(props: ChatMessageProps) {
 
 const styles = StyleSheet.create({
     container: {
-        padding: 10
+        padding: 10,
     },
     messageBox: {
         backgroundColor: '#e5e5e5',

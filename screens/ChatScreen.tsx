@@ -6,6 +6,7 @@ import ChatRooms from '../data/ChatRooms'
 import NewMessage from '../components/NewMessage/index';
 import { API, Auth, graphqlOperation } from 'aws-amplify';
 import { getUser } from './queries';
+import { onCreateChatRoom } from '../src/graphql/subscriptions';
 
 export default function ChatScreen() {
   const [chatRooms, setChatRooms] = useState([])
@@ -24,6 +25,15 @@ export default function ChatScreen() {
       }
     }
     fetchChats()
+  }, [])
+
+
+  useEffect(() => {
+      const sub = API.graphql(graphqlOperation(onCreateChatRoom)).subscribe({
+        next: (chatRoomData : object) => {
+          const newChatRoom = chatRoomData.value.data.onCreateChatRoom
+        }
+      })
   }, [])
 
   return (

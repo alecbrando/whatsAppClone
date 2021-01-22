@@ -17,7 +17,7 @@ export default function ChatListItem(props: ChatListProps) {
     useEffect(() => {
         const currentUser = async() => {
             const userInfo = await Auth.currentAuthenticatedUser()
-            setUser(chatRoom.chatRoomUsers.items[1].user)
+            setUser(chatRoom.chatRoomUsers.items[0].user.id === userInfo.id ? chatRoom.chatRoomUsers.items[1].user : chatRoom.chatRoomUsers.items[0].user)
         }
         currentUser()
     }, [])

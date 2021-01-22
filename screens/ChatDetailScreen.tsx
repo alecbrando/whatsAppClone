@@ -1,8 +1,7 @@
 import { useRoute } from '@react-navigation/native';
 import React, {useEffect, useState} from 'react'
-import { View, Text, FlatList, ImageBackground } from 'react-native';
+import { View, Text, FlatList, ImageBackground, StyleSheet } from 'react-native';
 import ChatMessage from '../components/ChatMessage';
-import Chats from '../data/Chats';
 import BG from '../assets/images/BG.png'
 import InputBox from '../components/InputBox/index';
 import { API, graphqlOperation } from 'aws-amplify';
@@ -14,14 +13,14 @@ import { onCreateMessage } from '../src/graphql/subscriptions';
 export default function ChatDetailScreen() {
     const [messages, setMessages] = useState([])
     const route = useRoute()
+    const fetchMessages = async () => {
+       const messageData = await API.graphql(graphqlOperation(messagesByChatRoom, {
+           chatRoomID: route.params.id,
+           sortDirection: 'DESC'
+       } ))
+       setMessages(messageData.data.messagesByChatRoom.items)
+   }
     useEffect(() => {
-         const fetchMessages = async () => {
-            const messageData = await API.graphql(graphqlOperation(messagesByChatRoom, {
-                chatRoomID: route.params.id,
-                sortDirection: 'ASC'
-            } ))
-            setMessages(messageData.data.messagesByChatRoom.items)
-        }
         fetchMessages()
     }, [])
 
@@ -32,8 +31,7 @@ export default function ChatDetailScreen() {
                 if(newMessage.chatRoomID !== route.params.id){
                     return
                 } else {
-                    console.log(messages)
-                    setMessages([...messages, newMessage])
+                    fetchMessages()
                 }
             }
         })
@@ -43,17 +41,26 @@ export default function ChatDetailScreen() {
     }, [])
 
 
-    
+
 
     return (
         <ImageBackground style={{height: '100%', width: '100%'}} source={BG}>
+            
             <FlatList
                 data={messages}
                 renderItem={({item}) => <ChatMessage message={item} />}
                 keyExtractor={(item) => item.id}
-                // inverted
+                showsVerticalScrollIndicator={false}
+                inverted
             />
         <InputBox chatRoomID={route.params.id} />
         </ImageBackground>
     )
 }
+
+
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+    },
+  });

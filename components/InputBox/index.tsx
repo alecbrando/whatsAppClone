@@ -1,15 +1,17 @@
 import React, {useState, useEffect} from 'react'
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, KeyboardAvoidingView, Platform } from 'react-native';
 import {MaterialCommunityIcons, MaterialIcons, FontAwesome5, Entypo, Fontisto} from '@expo/vector-icons'
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { API, Auth, graphqlOperation } from 'aws-amplify';
 import { createMessage, updateChatRoom } from '../../src/graphql/mutations';
 
-export default function InputBox(props) {
+export default function InputBox(props: any) {
+    
     const [myUserId, setMyUserId] = useState('')
     const [message, setMessage] = useState('')
     const {chatRoomID} = props
+
     useEffect(() => {
         const fetchUser = async () => {
           try {
@@ -59,6 +61,11 @@ export default function InputBox(props) {
     }
 
     return (
+        <KeyboardAvoidingView
+                behavior={Platform.OS === "ios" ? "padding" : "height"}
+                style={styles.container}
+                keyboardVerticalOffset={70}
+            >
         <View style={styles.container}>
             <View style={styles.leftContainer}>
                 <FontAwesome5 name="laugh-beam" size={24} color={'grey'} />
@@ -81,6 +88,7 @@ export default function InputBox(props) {
             </View>
             </TouchableOpacity>
         </View>
+        </KeyboardAvoidingView>
     )
 }
 
@@ -91,8 +99,7 @@ const styles = StyleSheet.create({
         margin: 10,
         flexDirection: 'row',
         alignItems: 'flex-end',
-        position: 'absolute',
-        bottom: 5
+        bottom: 5,
     },
     leftContainer: {
         flexDirection: 'row',
